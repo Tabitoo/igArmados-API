@@ -50,23 +50,11 @@ const countByCategory = async (id) => {
 }
 
 const create = async (body) => {
-    db.Products.create({
-        name : body.title,
-        price : body.price,
-        insale : body.insale,
-        guarantee_id : body.garantia,
-        component_id : body.component,
-        mark_id : body.mark,
-        stock : body.stock,
-        description : body.description,
-        features : body.features,
-        model : body.model,
-        category_id : body.category
-    })
+    return await db.Products.create(body)
 }
 
 const update = async (id, body) => {
-    return await db.Products.create({
+    return await db.Products.update({
         name: body.title,
         price: body.price,
         insale: body.insale,
