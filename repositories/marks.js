@@ -8,7 +8,14 @@ const getById = async (id) => {
     return await db.Marks.findByPk(id)
 }
 
+const update = async (id, body) => {
+    return await db.Marks.update(body, {
+        where : {id : id}
+    })
+}
+
 module.exports = {
     getAll,
-    getById
+    getById,
+    update
 }
