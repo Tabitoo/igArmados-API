@@ -55,7 +55,7 @@ const create = async (body) => {
 }
 
 const update = async (id, body) => {
-    const product = await productsRepository.getById)(id);
+    const product = await productsRepository.getById(id);
     
     if(!product) {throw createError(404, 'product not found')}
 
