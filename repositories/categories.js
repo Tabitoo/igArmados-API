@@ -5,8 +5,11 @@ const create = async (body) => {
     
 }
 
-const getAll = async () => {
-    return await db.Categorys.findAll()
+const getAll = async (limit, offset) => {
+    return await db.Categorys.findAll({
+        limit,
+        offset
+    })
 }
 
 const getById = async (id) => {

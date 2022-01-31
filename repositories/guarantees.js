@@ -5,8 +5,11 @@ const create = async (body) => {
     
 }
 
-const getAll = async () => {
-    return await db.Guarantees.findAll()
+const getAll = async (limit, offset) => {
+    return await db.Guarantees.findAll({
+        limit,
+        offset
+    })
 }
 
 const getById = async (id) => {

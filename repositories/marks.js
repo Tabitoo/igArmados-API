@@ -1,7 +1,15 @@
 const db = require('../database/models');
 
-const getAll = async () => {
-    return await db.Marks.findAll()
+const create = async (body) => {
+    return await db.Marks.create(body)
+    
+}
+
+const getAll = async (limit, offset) => {
+    return await db.Marks.findAll({
+        limit,
+        offset
+    })
 }
 
 const getById = async (id) => {
@@ -21,6 +29,7 @@ const remove = async (id) => {
 }
 
 module.exports = {
+    create,
     getAll,
     getById,
     update,

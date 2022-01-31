@@ -1,8 +1,14 @@
 const db = require("../database/models");
 
+const create = async (body) => {
+    return await db.Components.create(body)
+}
 
-const getAll = async () => {
-    return await db.Components.findAll()
+const getAll = async (limit, offset) => {
+    return await db.Components.findAll({
+        limit,
+        offset
+    })
 }
 
 const getById = async (id) => {
@@ -22,6 +28,7 @@ const remove = async (id) => {
 }
 
 module.exports = {
+    create,
     getAll,
     getById,
     update,
