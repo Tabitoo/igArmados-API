@@ -2,7 +2,14 @@ const createError = require('http-errors')
 const categoriesRepository = require('../repositories/categories')
 
 const getAll = async () => {
-    return await categoriesRepository.getAll()
+    const count = await categoriesRepository.count();
+    const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
+    if (count > 0) {
+        paginatedResult.data = await categoriesRepository.getAll(pageLimit, paginatedResult.offset) 
+    }
+
+    delete paginatedResult.offset
+    return paginatedResult
 }
 
 const getById = async (id) => {

@@ -2,7 +2,14 @@ const marksRepository = require('../repositories/marks')
 const createError = require('http-errors')
 
 const getAll = async () => {
-    return await marksRepository.getAll()
+    const count = await marksRepository.count();
+    const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
+    if (count > 0) {
+        paginatedResult.data = await marksRepository.getAll(pageLimit, paginatedResult.offset) 
+    }
+
+    delete paginatedResult.offset
+    return paginatedResult
 }
 
 const getById = async (id) => {

@@ -1,7 +1,14 @@
 const componentsRepository = require('../repositories/components')
 
 const getAll = async () => {
-    return await componentsRepository.getAll()
+    const count = await componentsRepository.count();
+    const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
+    if (count > 0) {
+        paginatedResult.data = await componentsRepository.getAll(pageLimit, paginatedResult.offset) 
+    }
+
+    delete paginatedResult.offset
+    return paginatedResult
 }
 
 const getById = async (id) => {

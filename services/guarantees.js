@@ -2,7 +2,14 @@ const guaranteesRepository = require('../repositories/guaranteess')
 const createError = require('http-errors')
 
 const getAll = async () => {
-    return await guaranteesRepository.getAll()
+    const count = await guaranteesRepository.count();
+    const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
+    if (count > 0) {
+        paginatedResult.data = await guaranteesRepository.getAll(pageLimit, paginatedResult.offset) 
+    }
+
+    delete paginatedResult.offset
+    return paginatedResult
 }
 
 const getById = async (id) => {
