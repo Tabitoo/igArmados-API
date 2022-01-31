@@ -1,9 +1,10 @@
 const categoriesService = require('../services/categories');
 
-const getAll = async (req, res, next) => {
+const getAll = async(res,req,next) => {
     try {
-        const data = await categoriesService.getAll();
-        res.status(200).json({ data : data })
+        const params = paginationParams.generate(req);
+        const data = await categoriesService.getAll(params)
+        res.status(200).json({ data })
 
     } catch (err) {
         next(err)

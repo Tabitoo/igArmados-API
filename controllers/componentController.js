@@ -1,9 +1,10 @@
 const componentsService = require('../services/components');
 
-const getAll = async (req, res, next) => {
+const getAll = async(res,req,next) => {
     try {
-        const data = await componentsService.getAll();
-        res.status(200).json({ data : data })
+        const params = paginationParams.generate(req);
+        const data = await componentsService.getAll(params)
+        res.status(200).json({ data })
 
     } catch (err) {
         next(err)
@@ -20,7 +21,29 @@ const getById = async (req, res, next) => {
     }
 }
 
+const create = async(res, req, next) => {
+    try {
+        const data = await componentsService.create(req.body)
+        res.status(201).json({ msg : 'component created succesfully', data })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+const update = async(res, req, next) => {
+    try {
+        const data = await componentsService.update(req.params.id, req.body);
+        res.status(200).json({ msg : 'component updated succesfully', data })
+    }
+    catch (err) {
+        next(err)
+    }
+}
+
 module.exports = {
     getAll,
-    getById
+    getById,
+    create,
+    update
 }

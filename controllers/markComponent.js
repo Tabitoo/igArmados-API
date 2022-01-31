@@ -1,9 +1,10 @@
 const marksService = require('../services/marks');
 
-const getAll = async (req, res, next) => {
+const getAll = async(res,req,next) => {
     try {
-        const data = await marksService.getAll();
-        res.status(200).json({ data : data })
+        const params = paginationParams.generate(req);
+        const data = await marksService.getAll(params)
+        res.status(200).json({ data })
 
     } catch (err) {
         next(err)
