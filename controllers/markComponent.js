@@ -21,7 +21,28 @@ const getById = async (req, res, next) => {
     }
 }
 
+const update = async(res, req, next) => {
+    try {
+        const data = await marksService.update(req.params.id, req.body);
+        res.status(200).json({ msg : 'mark updated succesfully', data })
+    }
+    catch (err) {
+        next(err)
+    }
+}
+
+const remove = async(res, req, next) => {
+    try {
+        await marksService.remove(req.params.id)
+        res.status(200).json({ msg: 'mark removed succesfully'})
+    } catch (err) {
+        next(err)
+        
+    }
+}
+
 module.exports = {
     getAll,
-    getById
+    getById,
+    update
 }

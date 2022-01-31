@@ -60,11 +60,22 @@ const searchProduct = async(res, req, next) => {
     }
 }
 
+const remove = async(res, req, next) => {
+    try {
+        await productsService.remove(req.params.id)
+        res.status(200).json({ msg: 'product removed succesfully'})
+    } catch (err) {
+        next(err)
+        
+    }
+}
+
 module.exports = {
     getAll,
     getById,
     getsRandomProducts,
     searchProduct,
     create,
-    update
+    update,
+    remove
 }

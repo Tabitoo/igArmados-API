@@ -41,9 +41,20 @@ const update = async(res, req, next) => {
     }
 }
 
+const remove = async(res, req, next) => {
+    try {
+        await componentsService.remove(req.params.id)
+        res.status(200).json({ msg: 'component removed succesfully'})
+    } catch (err) {
+        next(err)
+        
+    }
+}
+
 module.exports = {
     getAll,
     getById,
     create,
-    update
+    update,
+    remove
 }

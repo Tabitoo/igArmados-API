@@ -41,9 +41,20 @@ const update = async(res, req, next) => {
     }
 }
 
+const remove = async(res, req, next) => {
+    try {
+        await guaranteesService.remove(req.params.id)
+        res.status(200).json({ msg: 'guarantee removed succesfully'})
+    } catch (err) {
+        next(err)
+        
+    }
+}
+
 module.exports = {
     getAll,
     getById,
     create,
-    update
+    update,
+    remove
 }
