@@ -1,0 +1,154 @@
+/guarantees:
+  get:
+    summary: return a list of marks
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: number of the pagination
+    tags:
+      - guarantees
+    responses:
+      200:
+        description: The list of guarantees
+        content:
+          application/json:
+            schema:
+              properties:
+                prev:
+                  type: string
+                next:
+                  type: string
+                pages:
+                  type: integer
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Guarantee'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokenError'
+  post:
+    summary: create a guarantee
+    tags:
+      - guarantees
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Guarantee'
+    responses:
+      200:
+        descripton: Guarantee created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Guarantee'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+/guarantee/{id}:
+  get:
+    summary: return a guarantee
+    tags:
+      - guarantees
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The guarantee id
+    responses:
+      200:
+        description: The guarantee
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                    $ref: '#/components/schemas/Guarantee'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/badRequest'
+
+  update:
+    summary: update a guarantee
+    tags:
+      - guarantees
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The id of the guarantee
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Guarantee'
+    responses:
+      200:
+        descripton: Guarantee created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Guarantee'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+  delete:
+    sumary: delete a guarantee
+    tags:
+      - guarantees
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The guarantee id
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string

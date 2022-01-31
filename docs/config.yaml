@@ -1,0 +1,114 @@
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    
+  schemas:
+    Product:
+      type: object
+      required:
+      - name
+      - price
+      - insale
+      - stock
+      - description
+      - features
+      - model
+      - guarantee_id
+      - mark_id
+      - component_id
+      - category_id
+      properties:
+        name:
+          type: string
+          description: name of the product
+        price:
+          type: integer
+          description: price of the product
+        insale:
+          type: integer
+          description: if the product is in sale
+        stock:
+          type: integer
+          description: if the product have stock
+        description:
+          type: string
+          description: description of the product
+        features:
+          type: string
+          description: the features of the product
+        model:
+          type: string
+          description: model of the product
+        guarantee_id:
+          type: integer
+          description: Id of the guarantee
+        mark_id:
+          type: integer
+          description: Id of the mark
+        component_id:
+          type: integer
+          description: id of the component
+        category_id:
+          type: integer
+          description: id of the category
+      
+    Category:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+
+    Component:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string  
+
+    Mark:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string  
+
+    Guarantee:
+      type: object
+      properties:
+        type:
+          type: string
+
+    tokenError:
+      type: object
+      properties:
+        msg:
+          type: string
+      
+    validationsErrors:
+      type: objet
+      properties:
+        msg:
+          type: string
+        param:
+          type: string
+        location:
+          type: string
+      
+    badRequest:
+      type: object
+      properties:
+        msg:
+          type: string
+        errors:
+          type: array
+        items:
+          $ref: '#/components/schemas/validationsErrors'
+  

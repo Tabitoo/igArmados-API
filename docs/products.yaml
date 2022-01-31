@@ -1,0 +1,154 @@
+/products:
+  get:
+    summary: return a list of products
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: number of the pagination
+    tags:
+      - products
+    responses:
+      200:
+        description: The list of products
+        content:
+          application/json:
+            schema:
+              properties:
+                prev:
+                  type: string
+                next:
+                  type: string
+                pages:
+                  type: integer
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokenError'
+  post:
+    summary: update a product
+    tags:
+      - products
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Product'
+    responses:
+      200:
+        descripton: Product created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Product'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+/products/{id}:
+  get:
+    summary: return a product
+    tags:
+      - products
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The product id
+    responses:
+      200:
+        description: The product
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                    $ref: '#/components/schemas/Product'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/badRequest'
+
+  update:
+    summary: update a product
+    tags:
+      - products
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The id of the product
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Product'
+    responses:
+      200:
+        descripton: Product created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Product'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+  delete:
+    sumary: delete a product
+    tags:
+      - products
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product id
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string

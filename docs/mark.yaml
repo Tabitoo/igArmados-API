@@ -1,0 +1,154 @@
+/marks:
+  get:
+    summary: return a list of marks
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: number of the pagination
+    tags:
+      - marks
+    responses:
+      200:
+        description: The list of marks
+        content:
+          application/json:
+            schema:
+              properties:
+                prev:
+                  type: string
+                next:
+                  type: string
+                pages:
+                  type: integer
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Mark'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokenError'
+  post:
+    summary: create a mark
+    tags:
+      - marks
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Mark'
+    responses:
+      200:
+        descripton: Mark created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Mark'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+/marks/{id}:
+  get:
+    summary: return a mark
+    tags:
+      - marks
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The mark id
+    responses:
+      200:
+        description: The mark
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                    $ref: '#/components/schemas/Mark'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/badRequest'
+
+  update:
+    summary: update a mark
+    tags:
+      - marks
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The id of the mark
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Mark'
+    responses:
+      200:
+        descripton: Category created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Mark'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+  delete:
+    sumary: delete a category
+    tags:
+      - categories
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The category id
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
