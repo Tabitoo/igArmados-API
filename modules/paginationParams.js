@@ -1,12 +1,14 @@
 const generate = (req) => {
-    let { page } = req.query;
+    let { page, categoria } = req.query;
     page = page || 1;
+    categoria = categoria || null
 
     const baseUrl = `${req.protocol}://${req.get("host")}${req.baseUrl}`;
 
     return {
         page,
-        baseUrl
+        baseUrl,
+        categoria
     }
 }
 
