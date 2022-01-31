@@ -16,6 +16,10 @@ const getById = async (id) => {
     return await db.Marks.findByPk(id)
 }
 
+const count = async () => {
+    return await db.Marks.count();
+}
+
 const update = async (id, body) => {
     return await db.Marks.update(body, {
         where : {id : id}
@@ -32,6 +36,7 @@ module.exports = {
     create,
     getAll,
     getById,
+    count,
     update,
     remove
 }

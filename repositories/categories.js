@@ -16,6 +16,10 @@ const getById = async (id) => {
     return await db.Categorys.findByPk(id)
 }
 
+const count = async () => {
+    return await db.Categorys.count();
+}
+
 const update = async (id, body) => {
     return await db.Categorys.update(body, {
         where : {id : id}

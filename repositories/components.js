@@ -15,6 +15,10 @@ const getById = async (id) => {
     return await db.Components.findByPk(id)
 }
 
+const count = async () => {
+    return await db.Components.count();
+}
+
 const update = async (id, body) => {
     return await db.Components.update(body, {
         where : { id }
@@ -31,6 +35,7 @@ module.exports = {
     create,
     getAll,
     getById,
+    count,
     update,
     remove
 }
