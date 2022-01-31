@@ -14,8 +14,15 @@ const update = async (id, body) => {
     })
 }
 
+const remove = async (id) => {
+    return await db.Marks.destroy({
+        where : { id }
+    })
+}
+
 module.exports = {
     getAll,
     getById,
-    update
+    update,
+    remove
 }

@@ -19,9 +19,16 @@ const update = async (id, body) => {
     })
 }
 
+const remove = async (id) => {
+    return await db.Guarantees.destroy({
+        where : { id }
+    })
+}
+
 module.exports = {
     create,
     getAll,
     getById,
-    update
+    update,
+    remove
 }

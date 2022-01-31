@@ -41,6 +41,17 @@ const search = async (value) => {
     })
 }
 
+const getsRandomProducts = async (limit) => {
+    return await db.Products.findAll({
+        include: [
+            { association: 'imagenes' },  
+            { association: 'categoria' },
+        ],
+        order: sequelize.random(),
+        limit: Number(limit)
+    })
+}
+
 const count = async () => {
     return await db.Products.count();
 }
@@ -70,18 +81,13 @@ const update = async (id, body) => {
     }, { where: { id } })
 }
 
-const getsRandomProducts = async (limit) => {
-    return await db.Products.findAll({
-        include: [
-            { association: 'imagenes' },  
-            { association: 'categoria' },
-        ],
-        order: sequelize.random(),
-        limit: Number(limit)
+const remove = async (id) => {
+    return await db.Products.destroy({
+        where : { id }
     })
 }
 
- module.exports = {
+module.exports = {
     getAll,
     getAllByCategoryId,
     getsRandomProducts,
@@ -89,6 +95,7 @@ const getsRandomProducts = async (limit) => {
     search,
     create,
     update,
+    remove,
     count,
     countByCategory
 }   

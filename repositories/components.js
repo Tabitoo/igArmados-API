@@ -9,7 +9,21 @@ const getById = async (id) => {
     return await db.Components.findByPk(id)
 }
 
+const update = async (id, body) => {
+    return await db.Components.update(body, {
+        where : { id }
+    })
+}
+
+const remove = async (id) => {
+    return await db.Components.destroy({
+        where : { id }
+    })
+}
+
 module.exports = {
     getAll,
-    getById
+    getById,
+    update,
+    remove
 }
