@@ -1,12 +1,12 @@
 var express = require('express');
-const { getGuarantees, getOneGuarantee } = require('../controllers/guaranteeController');
+const guaranteeController = require('../controllers/guaranteeController');
 var router = express.Router();
 
 
-router.get('/all',getGuarantees);
-router.get('/:id', getOneGuarantee);
-router.post('/create',);
-router.put('/edit/:id', );
+router.get('/', guaranteeController.getAll);
+router.get('/:id', guaranteeController.getById);
+router.post('/', guaranteeController.create);
+router.put('/:id', guaranteeController.update);
 
 
 module.exports = router;

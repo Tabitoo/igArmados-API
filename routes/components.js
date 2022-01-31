@@ -1,12 +1,12 @@
 var express = require('express');
-const { getComponents, getOneComponent } = require('../controllers/componentController')
+const componentController = require('../controllers/componentController')
 var router = express.Router();
 
 
-router.get('/all',getComponents);
-router.get('/:id', getOneComponent);
-router.post('/create',);
-router.put('/edit/:id', );
+router.get('/', componentController.getAll);
+router.get('/:id', componentController.getById);
+router.post('/', componentController.create);
+router.put('/:id', componentController.update);
 
 
 module.exports = router;

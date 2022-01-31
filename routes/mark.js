@@ -1,12 +1,12 @@
 var express = require('express');
-const { getMarks, getOneMark } = require('../controllers/markComponent');
+const markComponent = require('../controllers/markComponent');
 var router = express.Router();
 
 
-router.get('/all',getMarks);
-router.get('/:id', getOneMark);
-router.post('/create',);
-router.put('/edit/:id', );
+router.get('/', markComponent.getAll);
+router.get('/:id', markComponent.getById);
+router.post('/',markComponent.create);
+router.put('/:id', markComponent.update);
 
 
 module.exports = router;
