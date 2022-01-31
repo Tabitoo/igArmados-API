@@ -1,9 +1,20 @@
 const guaranteesRepository = require('../repositories/guaranteess')
 const createError = require('http-errors')
 
+const getAll = async () => {
+    return await guaranteesRepository.getAll()
+}
+
+const getById = async (id) => {
+    const guarantee = await guaranteesRepository.getById(id)
+
+    if(!guarantee) { throw createError(404, 'guarantee not found') }
+    
+    return mark
+}
 
 const create = async (body) => {
-    const data = guaranteesRepository.create(body)
+    const data = await guaranteesRepository.create(body)
 
     if(!data) { throw createError(400) }
 
@@ -12,7 +23,7 @@ const create = async (body) => {
 }
 
 const update = async (id, body) => {
-    const guarantee = guaranteesRepository.getById(id)
+    const guarantee = await guaranteesRepository.getById(id)
 
     if(!guarantee) { throw createError(404, 'guarantee not found') }
 
@@ -23,21 +34,16 @@ const update = async (id, body) => {
     return await guaranteesRepository.getById(id)
 }
 
-const getAll = async () => {
-    return await guaranteesRepository.getAll()
+const remove = async (id) => {
+    const guarantee = await guaranteesRepository.remove(id);
+
+    if(!guarantee) { throw createError(404, 'guarantee not found')}
 }
-
-const getById = async (id) => {
-    const guarantee = guaranteesRepository.getById(id)
-
-    if(!guarantee) { throw createError(404, 'guarantee not found') }
-    
-    return mark
-} 
 
 module.exports = {
     create,
     getAll,
     getById,
-    update
+    update,
+    remove
 }

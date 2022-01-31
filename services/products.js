@@ -66,10 +66,17 @@ const update = async (id, body) => {
     return await productsRepository.getById(id)
 }
 
+const remove = async (id) => {
+    const product = await productsRepository.remove(id);
+
+    if(!product) { throw createError(404, 'product not found')}
+}
+
 module.exports = {
     getAll,
     getById,
     search,
     create,
-    update
+    update,
+    remove
 }
