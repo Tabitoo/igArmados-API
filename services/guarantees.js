@@ -1,4 +1,4 @@
-const guaranteesRepository = require('../repositories/guaranteess')
+const guaranteesRepository = require('../repositories/guarantees')
 const createError = require('http-errors')
 
 const getAll = async () => {
