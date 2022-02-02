@@ -1,7 +1,7 @@
-const productsService = require('../services/marks');
+const productsService = require('../services/products');
 const paginationParams = require('../modules/paginationParams')
 
-const getAll = async(res,req,next) => {
+const getAll = async(req,res,next) => {
     try {
         const params = paginationParams.generate(req);
         const data = await productsService.getAll(params)
@@ -12,7 +12,7 @@ const getAll = async(res,req,next) => {
     }
 } 
 
-const getById = async(res, req, next) => {
+const getById = async(req, res, next) => {
     try{
         const data = await productsService.getById(req.params.id)
         res.status(200).json({ data })
@@ -22,17 +22,16 @@ const getById = async(res, req, next) => {
     }
 }
 
-const create = async(res, req, next) => {
+const create = async(req, res, next) => {
     try {
-        const data = await productsService.create(req.body)
+        const data = await productsService.create(req.body, req.files[0].path)
         res.status(201).json({ msg : 'product created succesfully', data })
-
     } catch (err) {
         next(err)
     }
 }
 
-const update = async(res, req, next) => {
+const update = async(req, res, next) => {
     try {
         const data = await productsService.update(req.params.id, req.body);
         res.status(200).json({ msg : 'product updated succesfully', data })
@@ -42,7 +41,7 @@ const update = async(res, req, next) => {
     }
 }
 
-const getsRandomProducts = async(res, req, next) => {
+const getsRandomProducts = async(req, res, next) => {
     try {
         const data = await productsService.getsRandomProducts(req.params.limit)
         res.status(200).json({data})
@@ -51,7 +50,7 @@ const getsRandomProducts = async(res, req, next) => {
     }
 }
 
-const searchProduct = async(res, req, next) => {
+const searchProduct = async(req, res, next) => {
     try {
         const data = await productsService.searchProduct(req.query.search)
         res.status(200).json({data})
@@ -60,7 +59,7 @@ const searchProduct = async(res, req, next) => {
     }
 }
 
-const remove = async(res, req, next) => {
+const remove = async(req, res, next) => {
     try {
         await productsService.remove(req.params.id)
         res.status(200).json({ msg: 'product removed succesfully'})
