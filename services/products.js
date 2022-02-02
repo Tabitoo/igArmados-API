@@ -1,6 +1,12 @@
-const productsRepository = require('../repositories/products')
+const productsRepository = require('../repositories/products');
+const imagesRepository = require('../repositories/images');
+const marksRepository = require('../repositories/marks');
+const componentsRepository = require('../repositories/components');
+const categoriesRepository = require('../repositories/categories');
+const guaranteesRepository = require('../repositories/guarantees')
 const createError = require('http-errors');
 const { paginate } = require('../modules/pagination')
+const cloudinary = require('../modules/cloudUpload');
 const pageLimit = 10;
 let paginatedResult;
 
@@ -36,22 +42,43 @@ const search = async (query) => {
     return await productsRepository.search(query)
 }
 
-const create = async (body) => {
+const create = async (body, filePath) => {
+
     const product = {
-        name : body.title,
-        price : body.price,
-        insale : body.insale,
-        guarantee_id : body.garantia,
-        component_id : body.component,
-        mark_id : body.mark,
-        stock : body.stock,
+        name : body.name,
+        price : Number(body.price),
+        insale : Number(body.insale),
+        guarantee_id : Number(body.guarantee_id),
+        component_id : Number(body.component_id),
+        mark_id : Number(body.mark_id),
+        stock : Number(body.stock),
         description : body.description,
         features : body.features,
         model : body.model,
-        category_id : body.category
+        category_id : Number(body.category_id)
     }
-    if(!product) { throw createError(400) }
-    return await productsRepository.create(product)
+
+    const component = await componentsRepository.getById(product.component_id);
+    const guarantee = await guaranteesRepository.getById(product.guarantee_id);
+    const mark = await marksRepository.getById(product.mark_id);
+    const category = await categoriesRepository.getById(product.category_id);
+
+    if(!component) {throw createError(404, 'component not found')}
+    if(!guarantee) {throw createError(404, 'guarantee not found')}
+    if(!mark) {throw createError(404, 'mark not found')}
+    if(!category) {throw createError(404, 'category not found')}
+
+    const newProduct = await productsRepository.create(product)
+
+    if(!newProduct) { throw createError(400) }
+
+    const uploadedFile = await cloudinary.v2.uploader.upload(filePath)
+
+    await imagesRepository.create({ name : uploadedFile.url, product_id : newProduct.id })
+
+    newProduct.dataValues['imageUrl'] = uploadedFile.url
+    
+    return newProduct
 }
 
 const update = async (id, body) => {
