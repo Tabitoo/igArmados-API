@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 module.exports = {
   "development": {
-    "username": "root",
-    "password": "root",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASSWORD,
     "database": "ig-armados",
     "host": "127.0.0.1",
     "dialect": "mysql"
