@@ -33,7 +33,7 @@
             schema:
               $ref: '#/components/schemas/tokenError'
   post:
-    summary: update a product
+    summary: create a product
     tags:
       - products
     requestBody:
@@ -43,7 +43,7 @@
           schema:
             $ref: '#/components/schemas/Product'
     responses:
-      200:
+      201:
         descripton: Product created succesfully
         content:
           application/json:
@@ -93,7 +93,7 @@
             schema:
               $ref: '#/components/schemas/badRequest'
 
-  update:
+  put:
     summary: update a product
     tags:
       - products

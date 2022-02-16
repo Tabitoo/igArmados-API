@@ -43,6 +43,9 @@ components:
         model:
           type: string
           description: model of the product
+        image:
+          type: file
+          description: image of the product  
         guarantee_id:
           type: integer
           description: Id of the guarantee
