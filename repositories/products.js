@@ -4,7 +4,7 @@ const getAll = async (limit, offset) => {
     return await db.Products.findAll({
         limit,
         offset,
-        include: [{association: 'imagenes'}, {association: 'categorias'}]
+        include: [{association: 'imagenes'}, {association: 'categoria'}]
     })
 }
 
@@ -65,19 +65,7 @@ const create = async (body) => {
 }
 
 const update = async (id, body) => {
-    return await db.Products.update({
-        name: body.name,
-        price: Number(body.price),
-        insale: body.insale,
-        guarantee_id: Number(body.garantia),
-        component_id: body.component,
-        mark_id: Number(body.mark),
-        model: body.model,
-        stock: body.stock,
-        description: body.description,
-        features: body.features,
-        category_id: Number(body.category),
-    }, { where: { id } })
+    return await db.Products.update(body, { where: { id } })
 }
 
 const remove = async (id) => {

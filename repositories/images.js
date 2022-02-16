@@ -4,14 +4,15 @@ const create = async (body) => {
     try {
         return await db.Images.create(body)
     } catch (error) {
+        console.log('a')
         console.log(error)
     }
     
 }
 
-const update = async (body) => {
+const update = async (id ,body) => {
     return await db.Images.update(body, {
-        where : { id }
+        where : { product_id : id }
     })
 }
 

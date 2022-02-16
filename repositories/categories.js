@@ -36,6 +36,7 @@ module.exports = {
     create,
     getAll,
     getById,
+    count,
     update,
     remove
 }
