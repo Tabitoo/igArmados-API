@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get('/', markComponent.getAll);
 router.get('/:id', markComponent.getById);
-router.post('/', nameValidation.validationFields, markComponent.create);
+//router.post('/', nameValidation.validationFields, markComponent.create);
 router.put('/:id', markComponent.update);
 
 

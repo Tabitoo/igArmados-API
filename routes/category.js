@@ -4,9 +4,9 @@ const nameValidation = require('../middlewares/nameValidation')
 var router = express.Router();
 
 
-router.get('/', nameValidation.validationFields, categoryController.getAll);
+router.get('/', categoryController.getAll);
 router.get('/:id', categoryController.getById);
-router.post('/', categoryController.create);
+router.post('/', nameValidation.validationFields, categoryController.create);
 router.put('/:id', categoryController.update);
 
 

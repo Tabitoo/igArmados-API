@@ -8,8 +8,8 @@ router.get('/search',productController.searchProduct);
 router.get('/',productController.getAll);
 router.get('/:id', productController.getById);
 router.get('/randomproducts/:limit', productController.getsRandomProducts);
-router.post('/', productValidation.validationFields, upload.any(), productController.create);
-router.put('/:id', productValidation.validationFields, upload.any(), productController.update);
+router.post('/', upload.any(), productValidation.validationFields,  productController.create);
+router.put('/:id', upload.any(), productValidation.validationFields, productController.update);
 router.delete('/:id',productController.remove);
 
 module.exports = router;
