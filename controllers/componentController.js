@@ -1,6 +1,8 @@
 const componentsService = require('../services/components');
+const paginationParams = require('../modules/paginationParams')
 
-const getAll = async(res,req,next) => {
+
+const getAll = async(req,res,next) => {
     try {
         const params = paginationParams.generate(req);
         const data = await componentsService.getAll(params)

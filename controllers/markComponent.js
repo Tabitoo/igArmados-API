@@ -1,6 +1,8 @@
 const marksService = require('../services/marks');
+const paginationParams = require('../modules/paginationParams')
 
-const getAll = async(res,req,next) => {
+
+const getAll = async(req, res, next) => {
     try {
         const params = paginationParams.generate(req);
         const data = await marksService.getAll(params)
@@ -21,7 +23,7 @@ const getById = async (req, res, next) => {
     }
 }
 
-const create = async(res, req, next) => {
+const create = async(req, res, next) => {
     try {
         const data = await marksService.create(req.body)
         res.status(201).json({ msg : 'category created succesfully', data })
@@ -31,7 +33,7 @@ const create = async(res, req, next) => {
     }
 }
 
-const update = async(res, req, next) => {
+const update = async(req, res, next) => {
     try {
         const data = await marksService.update(req.params.id, req.body);
         res.status(200).json({ msg : 'mark updated succesfully', data })
@@ -41,7 +43,7 @@ const update = async(res, req, next) => {
     }
 }
 
-const remove = async(res, req, next) => {
+const remove = async(req, res, next) => {
     try {
         await marksService.remove(req.params.id)
         res.status(200).json({ msg: 'mark removed succesfully'})

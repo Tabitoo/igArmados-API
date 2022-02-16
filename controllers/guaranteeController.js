@@ -1,6 +1,8 @@
 const guaranteesService = require('../services/guarantees');
+const paginationParams = require('../modules/paginationParams')
 
-const getAll = async(res,req,next) => {
+
+const getAll = async(req,res,next) => {
     try {
         const params = paginationParams.generate(req);
         const data = await guaranteesService.getAll(params)

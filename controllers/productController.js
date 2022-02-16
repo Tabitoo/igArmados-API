@@ -24,16 +24,18 @@ const getById = async(req, res, next) => {
 
 const create = async(req, res, next) => {
     try {
+        console.log('esta llegando al try?')
         const data = await productsService.create(req.body, req.files[0].path)
         res.status(201).json({ msg : 'product created succesfully', data })
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        console.log(error)
+        next(error)
     }
 }
 
 const update = async(req, res, next) => {
     try {
-        const data = await productsService.update(req.params.id, req.body);
+        const data = await productsService.update(req.params.id, req.body, req.files[0]?.path);
         res.status(200).json({ msg : 'product updated succesfully', data })
     }
     catch (err) {
