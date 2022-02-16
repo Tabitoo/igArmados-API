@@ -11,7 +11,7 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey : true
         },
         name: {
-            type: dataTypes.STRING(45),
+            type: dataTypes.STRING(150),
             allowNull: false,
         }, 
         product_id:{

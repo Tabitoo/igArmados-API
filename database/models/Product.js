@@ -14,8 +14,8 @@ module.exports = (sequelize, dataTypes) => {
             allowNull : false,
             validate : {
                 notEmpty : true,
-                notNull : true,
-                len : [10]
+                notNull : true
+                /*len : [10]*/
 
             }
         },
@@ -52,10 +52,10 @@ module.exports = (sequelize, dataTypes) => {
             validate : {
                 notNull : true,
                 notEmpty : true,
-                len : {
+                /*len : {
                     args : [20,500],
                     msg : 'Debe tener como minimo 20 caracteres y como maximo 500'
-                },
+                },*/
             }
         },
         features : {
@@ -64,10 +64,10 @@ module.exports = (sequelize, dataTypes) => {
             validate : {
                 notNull : true,
                 notEmpty : true,
-                len : {
+                /*len : {
                     args : [20,500],
                     msg : 'Debe tener como minimo 20 caracteres y como maximo 500'
-                },
+                },*/
             }
         },
         model:{
