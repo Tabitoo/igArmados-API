@@ -1,6 +1,11 @@
 const componentsRepository = require('../repositories/components')
+const createError = require('http-errors')
+const { paginate } = require('../modules/pagination')
 
-const getAll = async () => {
+const pageLimit = 10;
+
+
+const getAll = async ({baseUrl, page}) => {
     const count = await componentsRepository.count();
     const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
     if (count > 0) {

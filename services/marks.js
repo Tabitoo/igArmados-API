@@ -1,7 +1,11 @@
 const marksRepository = require('../repositories/marks')
 const createError = require('http-errors')
+const { paginate } = require('../modules/pagination')
 
-const getAll = async () => {
+const pageLimit = 10;
+
+
+const getAll = async ({baseUrl, page}) => {
     const count = await marksRepository.count();
     const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
     if (count > 0) {

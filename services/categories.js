@@ -1,7 +1,11 @@
 const createError = require('http-errors')
 const categoriesRepository = require('../repositories/categories')
+const { paginate } = require('../modules/pagination')
 
-const getAll = async () => {
+const pageLimit = 10;
+
+
+const getAll = async ({baseUrl, page}) => {
     const count = await categoriesRepository.count();
     const paginatedResult = await paginate(baseUrl, page, pageLimit, count);
     if (count > 0) {
@@ -13,7 +17,7 @@ const getAll = async () => {
 }
 
 const getById = async (id) => {
-    const category = categoriesRepository.getById(id)
+    const category = await categoriesRepository.getById(id)
 
     if(!category) { throw createError(404, 'category not found') }
     
