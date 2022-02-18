@@ -1,13 +1,14 @@
 var express = require('express');
-const markComponent = require('../controllers/markComponent');
+const markController = require('../controllers/markController');
 const nameValidation = require('../middlewares/nameValidation')
 var router = express.Router();
 
 
-router.get('/', markComponent.getAll);
-router.get('/:id', markComponent.getById);
-//router.post('/', nameValidation.validationFields, markComponent.create);
-router.put('/:id', markComponent.update);
+router.get('/', markController.getAll);
+router.get('/:id', markController.getById);
+router.post('/', nameValidation.validationFields, markController.create);
+router.put('/:id', markController.update);
+router.delete('/:id',markController.remove);
 
 
 module.exports = router;

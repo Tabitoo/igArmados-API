@@ -6,8 +6,9 @@ var router = express.Router();
 
 router.get('/', guaranteeController.getAll);
 router.get('/:id', guaranteeController.getById);
-//router.post('/', nameValidation.validationFields, guaranteeController.create);
+router.post('/', nameValidation.validationFields, guaranteeController.create);
 router.put('/:id', guaranteeController.update);
+router.delete('/:id',guaranteeController.remove);
 
 
 module.exports = router;

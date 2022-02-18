@@ -8,6 +8,7 @@ router.get('/', categoryController.getAll);
 router.get('/:id', categoryController.getById);
 router.post('/', nameValidation.validationFields, categoryController.create);
 router.put('/:id', categoryController.update);
+router.delete('/:id', categoryController.remove);
 
 
 module.exports = router;

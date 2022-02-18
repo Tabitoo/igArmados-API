@@ -6,8 +6,9 @@ var router = express.Router();
 
 router.get('/', componentController.getAll);
 router.get('/:id', componentController.getById);
-//router.post('/', nameValidation.validationFields, componentController.create);
+router.post('/', nameValidation.validationFields, componentController.create);
 router.put('/:id', componentController.update);
+router.delete('/:id',componentController.remove);
 
 
 module.exports = router;
