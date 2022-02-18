@@ -1,0 +1,154 @@
+/components:
+  get:
+    summary: return a list of components
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: number of the pagination
+    tags:
+      - components
+    responses:
+      200:
+        description: The list of components
+        content:
+          application/json:
+            schema:
+              properties:
+                prev:
+                  type: string
+                next:
+                  type: string
+                pages:
+                  type: integer
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Component'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokenError'
+  post:
+    summary: create a component
+    tags:
+      - components
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Component'
+    responses:
+      200:
+        descripton: Component created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Component'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+/components/{id}:
+  get:
+    summary: return a component
+    tags:
+      - components
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The component id
+    responses:
+      200:
+        description: The component
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                    $ref: '#/components/schemas/Component'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/badRequest'
+
+  update:
+    summary: update a component
+    tags:
+      - components
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: The id of the component
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Component'
+    responses:
+      200:
+        descripton: Component created succesfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/Component'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              properties:
+                msg:
+                  type: string
+                data:
+                  $ref: '#/components/schemas/badRequest'
+  delete:
+    sumary: delete a component
+    tags:
+      - components
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The component id
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                msg:
+                  type: string
