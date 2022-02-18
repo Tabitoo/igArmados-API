@@ -4,7 +4,6 @@ const createError = require("http-errors");
 
 exports.checkValidationResults = async (req, res, next) => {
     const errors = validationResult(req);
-    console.log(req)
     if (!errors.isEmpty()) {
         const newError = createError(400, {msg: 'Input validation error', errors: errors.array()})
 
