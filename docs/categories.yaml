@@ -43,7 +43,7 @@
           schema:
             $ref: '#/components/schemas/Category'
     responses:
-      200:
+      201:
         descripton: Category created succesfully
         content:
           application/json:

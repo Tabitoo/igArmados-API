@@ -43,7 +43,7 @@
           schema:
             $ref: '#/components/schemas/Component'
     responses:
-      200:
+      201:
         descripton: Component created succesfully
         content:
           application/json:

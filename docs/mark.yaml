@@ -43,7 +43,7 @@
           schema:
             $ref: '#/components/schemas/Mark'
     responses:
-      200:
+      201:
         descripton: Mark created succesfully
         content:
           application/json:
@@ -133,16 +133,16 @@
                 data:
                   $ref: '#/components/schemas/badRequest'
   delete:
-    sumary: delete a category
+    sumary: delete a mark
     tags:
-      - categories
+      - marks
     parameters:
       - in: path
         name: id
         schema:
           type: string
         required: true
-        description: The category id
+        description: The mark id
     responses:
       200:
         content:

@@ -43,7 +43,7 @@
           schema:
             $ref: '#/components/schemas/Guarantee'
     responses:
-      200:
+      201:
         descripton: Guarantee created succesfully
         content:
           application/json:
